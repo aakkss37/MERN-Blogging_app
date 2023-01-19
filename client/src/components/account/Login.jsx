@@ -4,12 +4,25 @@ import { Component, LoginContainer, Image, Wrapper, LoginButton, SignupButton, T
 import { TextField } from '@mui/material';
 
 
-
+const initialSignUpValue = {
+	name: '',
+	email: '',
+	password: ''
+}
 
 const Login = () => {
 
-	const [haveAccount, setHaveAccount] = useState(true)
+	const [haveAccount, setHaveAccount] = useState(true);
+	const [signUpInput, setSignUpInput] = useState(initialSignUpValue);
 
+	const signUpInputHandler = (e) => {
+		// const inputName = e.target.name;
+		// const inputValue = e.target.value;
+		// const obj = {inputName: inputValue} ----> "inputName" itself becone a key name here rether then taking value if "inputName" given above.
+		// const obj = {[inputName]: inputValue} ----> to do so, we have to keep inputName in [] square bracket.. then it will make the key name as the value if inputName.
+		// console.log(obj);
+		setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value });
+	}
 
 	return (
 		<Component>
@@ -26,9 +39,9 @@ const Login = () => {
 					</Wrapper>
 					:
 					<Wrapper>
-						<TextField variant="standard" name='name' label='Enter Name' />
-						<TextField variant="standard" name='username' label='Enter Username' />
-						<TextField variant="standard" name='password' label='Enter Password' />
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='name' label='Enter Name' required />
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='username' label='Enter Username' required />
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='password' label='Enter Password' required />
 
 						<SignupButton >Signup</SignupButton>
 						<Text style={{ textAlign: 'center' }}>OR</Text>
