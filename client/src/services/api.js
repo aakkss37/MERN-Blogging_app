@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_NOTIFICATION_MESSAGE } from '../constants/configConstant';
 
 
 const API_URL = 'http://localhost:8000';
@@ -14,6 +15,7 @@ const axiosInstance = axios.create({  // axios.create --> You can create a new i
 // Interceptors can be used to modify requests before they are sent. This can be useful for adding authentication headers, setting timeouts, or adding query parameters.
 axios.interceptors.request.use(
 	(config) => {
+		// code eg: start gloable loader.
 		return config;
 	},
 	(error) => {
@@ -57,18 +59,36 @@ const processResponce = (responce) => {
 }
 
 
+
 // Error can be of 3 type:-
 const processError = (error) => {
 	if (error.responce) {
 		// 1. responce error --> request sent sucessfuly... request is received by server... server also has sent a responce sucessfuly... but the responce was other then 200 series  i.e. server couldn't process the request due to any reason
-
+		console.log("Error in respoce ---> ", error.toJSON());
+		return {
+			isError: true,
+			msg: API_NOTIFICATION_MESSAGE.responceFailure,
+			code: error.responce.status
+		}
 	}
 	else if (error.request) {
 		// 2. request error  --> request sent sucessfuly... but no responce was received.
-
+		console.log("Error in request ---> ", error.toJSON());
+		return {
+			isError: true,
+			msg: API_NOTIFICATION_MESSAGE.requestFailuer,
+			code: ""
+		}
 	}
 	else {
 		// 3. network error  --> couldn't make request(reason can be any thing.. like connection loss..etc) OR something went wrong from client side.
-
+		console.log("Error in network ---> ", error.toJSON());
+		return {
+			isError: true,
+			msg: API_NOTIFICATION_MESSAGE.networkError,
+			code: ""
+		}
 	}
 }
+
+
