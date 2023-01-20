@@ -22,3 +22,22 @@ export const API_NOTIFICATION_MESSAGE = {
 		message: "Unble to connect wit the server. Please check your internet connection OR try again leter"
 	}
 };
+
+
+
+// API SERVICE CALL
+/*
+Sample request:--->
+apiService: {
+	url: '/endPoint',
+	method: 'POST/GET/PUT/PATCH/DELETE',
+	params: 'true/false',
+	quary: 'true/false',
+}
+*/
+export const SERVICE_URL = {
+	userSignup: {
+		url: '/signup',
+		method: 'POST',
+	}
+}
