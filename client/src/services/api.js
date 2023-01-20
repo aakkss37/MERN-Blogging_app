@@ -60,7 +60,7 @@ const processResponce = (responce) => {
 // Error can be of 3 type:-
 const processError = (error) => {
 	if (error.responce) {
-		// 1. responce error --> request sent sucessfuly... request is received by server... server also has sent a responce sucessfuly... but the responce was other then 200 series  i.e. server couldn't process the request due to any reson
+		// 1. responce error --> request sent sucessfuly... request is received by server... server also has sent a responce sucessfuly... but the responce was other then 200 series  i.e. server couldn't process the request due to any reason
 
 	}
 	else if (error.request) {
