@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import image from '../../assets/logo.png'
 import { Component, LoginContainer, Image, Wrapper, LoginButton, SignupButton, Text } from './LoginStyle.js'
 import { TextField } from '@mui/material';
-
+import { API } from '../../services/api';
 
 const initialSignUpValue = {
 	name: '',
@@ -24,7 +24,10 @@ const Login = () => {
 		setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value });
 	}
 
-	const signupUser = ()=>{}
+	const signupUser = async()=>{
+		let responce = await API.userSignup(signUpInput);
+		console.log(responce);
+	}
 
 	return (
 		<Component>
