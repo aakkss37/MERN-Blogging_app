@@ -119,7 +119,7 @@ const processError = (error) => {
 
 
 
-const API = {};
+export const API = {};
 /*
 This is a JavaScript for...of loop that is used to iterate over the properties of the 
 SERVICE_URLS object. Object.entries(SERVICE_URLS) returns an array of key-value pairs 
