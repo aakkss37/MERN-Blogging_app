@@ -1,5 +1,31 @@
 import axios from 'axios';
-import { API_NOTIFICATION_MESSAGE } from '../constants/configConstant';
+import { API_NOTIFICATION_MESSAGE, SERVICE_URL } from '../constants/configConstant';
+
+
+/*
+This code defines an API object that contains functions for making various types of HTTP 
+requests using the Axios library. The axios.create() function is used to create an instance 
+of the Axios client with a base URL and timeout value set.
+
+The code then sets up request and response interceptors on the axios instance. 
+These interceptors allow for processing of the request and response before they are 
+sent or received. In this case, the request interceptor just returns the config unchanged, 
+while the response interceptor uses the processResponse function to check the status code of 
+the response and return an object with relevant information.
+
+The processError function is used to handle errors that occur during the request. It checks 
+whether the error is a response error or a request error and returns an object with relevant 
+error information.
+
+Finally, the code uses a for-of loop to iterate over the properties of the SERVICE_URL object 
+and create corresponding properties on the API object. Each property on the API object is a 
+function that takes 3 parameters: body, showUploadProgress, showDownloadProgress. This function 
+creates an axios request with the url, method and data from the corresponding SERVICE_URL object 
+property and also adds upload and download progress callbacks if they are provided.
+
+It also exports API_NOTIFICATION_MESSAGE and SERVICE_URL constants which are used in the above functions.
+*/
+
 
 
 const API_URL = 'http://localhost:8000';
@@ -92,3 +118,38 @@ const processError = (error) => {
 }
 
 
+
+const API = {};
+/*
+This is a JavaScript for...of loop that is used to iterate over the properties of the 
+SERVICE_URLS object. Object.entries(SERVICE_URLS) returns an array of key-value pairs 
+for the properties of the SERVICE_URLS object.
+In each iteration, the loop assigns the current key-value pair to the variables key and 
+value, respectively. The key variable will contain the name of the property, and the value 
+variable will contain the value associated with that property.
+For example, on the first iteration, key would be "userLogin" and value would be 
+{ url: '/login', method: 'POST' }. On the second iteration, key would be "userSignup" 
+and value would be { url: '/signup', method: 'POST' }, and so on.
+*/
+for(const [key, value] of Object.entries(SERVICE_URL)){
+	API[key] = (body, showUploadProgress, showDownloadProgress) => { // ---> function creates an axios request
+		axiosInstance({
+			url: value.url,
+			method: value.method,
+			data: body,
+			responseType: value.responceType,
+			onUploadProgress: (ProgressEvent)=>{
+				if(showUploadProgress){
+					let percentComplete = Math.round((ProgressEvent.loaded*100)/ProgressEvent.total);
+					showUploadProgress(percentComplete);
+				}
+			},
+			onDownloadProgress: (ProgressEvent)=>{
+				if(showDownloadProgress){
+					let percentComplete = Math.round((ProgressEvent.loaded*100)/ProgressEvent.total);
+					showDownloadProgress(percentComplete)
+				}
+			}
+		})
+	}
+}
