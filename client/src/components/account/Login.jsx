@@ -19,7 +19,7 @@ const initialSignUpValue = {
 }
 
 
-const Login = () => {
+const Login = (props) => {
 
 	//***  STATES ***//
 	const [haveAccount, setHaveAccount] = useState(true);
@@ -82,8 +82,8 @@ const Login = () => {
 				userName: responce.data.userName,
 				name: responce.data.name
 			})
+			props.setUserAuthanticated(true);
 			navigate('/home')
-
 		} catch (error) {
 
 			console.log("error ----> ", error);
