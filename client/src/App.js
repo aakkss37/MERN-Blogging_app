@@ -10,7 +10,7 @@ function App () {
 		<DataProvider>
 			<BrowserRouter>
 			<Header/>
-				<div className="App">
+				<div className="App" style={{marginTop: 74}}>
 					<Routes>
 						<Route path='/login' element={<Login />}/>
 						<Route path='/home' element={<Home />}/>

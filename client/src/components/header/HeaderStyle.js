@@ -5,6 +5,7 @@ import { AppBar, Toolbar, styled } from '@mui/material';
 export const Component = styled(AppBar)`
     background: #FFFFFF;
     color: black;
+	margin: 0;
 `;
 
 export const Container = styled(Toolbar)`
@@ -16,9 +17,11 @@ export const Container = styled(Toolbar)`
 		display: flex;
     	justify-content: space-between;
 		align-items: center;
+		
 	  }    
     & > div > a {
-        padding: 20px;
+        margin-left: 10px;
+		margin-right: 10px;
         color: rgb(156 211 201);
         text-decoration: none;
 		font-weight: 800;
