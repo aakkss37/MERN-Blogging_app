@@ -29,59 +29,62 @@ It also exports API_NOTIFICATION_MESSAGE and SERVICE_URL constants which are use
 
 
 const API_URL = 'http://localhost:8000';
-const axiosInstance = axios.create({  // axios.create --> You can create a new instance of axios with a custom config.
+const axiosInstance = axios.create({ // axios.create --> You can create a new instance of axios with a custom config.
 	baseURL: API_URL,
 	timeout: 10000,
-	header: {
+	headers: {
 		"content-type": "application/json"
 	}
-})
+});
 
 
 // Interceptors can be used to modify requests before they are sent. This can be useful for adding authentication headers, setting timeouts, or adding query parameters.
 axios.interceptors.request.use(
 	(config) => {
 		// code eg: start gloable loader.
+		console.log("request sent --->", config);
 		return config;
 	},
 	(error) => {
+		console.log("could not make request --->", error);
 		return Promise.reject(error);
 	}
 )
 
-axios.interceptors.response.use(
-	(responce) => {
-		// code eg: stop gloable loader.
-		return processResponce(responce);
-	},
-	(error) => {
-		// code eg: stop gloable loader.
-		return Promise.reject(processError(error));
-	}
+axiosInstance.interceptors.response.use(
+    function(response) {
+        // Stop global loader here
+		// console.log("reasponce for api request ---> ", response)
+        return processResponse(response);
+    },
+    function(error) {
+        // Stop global loader here
+		// console.log("reasponce for api request ---> ", error)
+        return Promise.reject(processError(error));
+    }
 )
 
 // // // // // // // // // // // // // // // // // // // // //
 // It is a common responce for all the API's..
 // if responce is sucess --> return {isSucess: true, data: object}
 // if responce is failed --> return {isFailure: true, status: string, msg: string, code: statusCode->int}
-const processResponce = (responce) => {
+const processResponse = (response) => {
 	// rasponce sucessful
-	if (responce?.status >= 200 && responce?.status < 300) { //The question mark (?) in "response?.status" is a JavaScript feature called optional chaining. It allows you to access a property of an object, even if that object or one of its parent objects is null or undefined. If the object is null or undefined, the expression returns undefined instead of throwing an error. In this case, it's checking if the "status" property of the "response" object is equal to 200, and if so, it will execute the code within the if statement.
-		return {
-			isSucess: true,
-			data: responce.data
+	if (response?.status === 200) {//The question mark (?) in "response?.status" is a JavaScript feature called optional chaining. It allows you to access a property of an object, even if that object or one of its parent objects is null or undefined. If the object is null or undefined, the expression returns undefined instead of throwing an error. In this case, it's checking if the "status" property of the "response" object is equal to 200, and if so, it will execute the code within the if statement.
+		return { 
+			isSuccess: true, 
+			data: response.data 
 		}
-	}
+	} 
 	// responce failed
 	else {
 		return {
 			isFailure: true,
-			status: responce?.status,
-			msg: responce?.msg,
-			code: responce?.code
+			status: response?.status,
+			msg: response?.msg,
+			code: response?.code
 		}
 	}
-
 }
 
 
@@ -133,7 +136,7 @@ and value would be { url: '/signup', method: 'POST' }, and so on.
 */
 for(const [key, value] of Object.entries(SERVICE_URL)){
 	API[key] = (body, showUploadProgress, showDownloadProgress) => { // ---> function creates an axios request
-		axiosInstance({
+		return axiosInstance({
 			url: value.url,
 			method: value.method,
 			data: body,

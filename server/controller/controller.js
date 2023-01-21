@@ -4,7 +4,7 @@ import User from "../model/userModel.js";
 
 export const signupUser = async(request, responce)=>{
 	console.log('request received ---> signup');
-	// console.log(request.body)
+	console.log(request.body)
 	try {
 		const newUser = await User.create(request.body)
 		await newUser.save();

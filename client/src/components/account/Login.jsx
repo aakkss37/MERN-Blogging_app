@@ -6,7 +6,7 @@ import { API } from '../../services/api';
 
 const initialSignUpValue = {
 	name: '',
-	email: '',
+	userName: '',
 	password: ''
 }
 
@@ -14,6 +14,8 @@ const Login = () => {
 
 	const [haveAccount, setHaveAccount] = useState(true);
 	const [signUpInput, setSignUpInput] = useState(initialSignUpValue);
+	const [isError, setIsError] = useState(false);
+	const [isNewAccountCreated, setIsNewAccountCreated]  = useState(false)
 
 	const signUpInputHandler = (e) => {
 		// const inputName = e.target.name;
@@ -24,9 +26,19 @@ const Login = () => {
 		setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value });
 	}
 
-	const signupUser = async()=>{
-		let responce = await API.userSignup(signUpInput);
-		console.log(responce);
+	const signupUser = async () => {
+		try {
+			let responce = await API.userSignup(signUpInput);
+			console.log("responce <-------- ", responce, )
+			setSignUpInput(initialSignUpValue)
+			setHaveAccount(true);
+			setIsError(false);
+			setIsNewAccountCreated(true);
+		} catch (error) {
+			console.log("error ----> ", error);
+			setIsError(true);
+		}
+			
 	}
 
 	return (
@@ -35,6 +47,7 @@ const Login = () => {
 				<Image src={image} alt="blog" />
 				{haveAccount ?
 					<Wrapper>
+						{isNewAccountCreated && <Text style={{ color: 'green' }}>Congratulations! Your account has been cteated successfully. Please Login.</Text>}
 						<TextField variant="standard" name='username' label='Enter Username' />
 						<TextField variant="standard" name='password' label='Enter Password' />
 						<LoginButton variant="contained" >Login</LoginButton>
@@ -43,8 +56,9 @@ const Login = () => {
 					</Wrapper>
 					:
 					<Wrapper>
+						{isError && <Text style={{ color: 'red' }}>Oops.. Something went wrong, Please try again.</Text>}
 						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='name' label='Enter Name' required />
-						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='username' label='Enter Username' required />
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='userName' label='Enter Username' required />
 						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='password' label='Enter Password' required />
 						<SignupButton onClick={signupUser} >Signup</SignupButton>
 						<Text style={{ textAlign: 'center' }}>OR</Text>
