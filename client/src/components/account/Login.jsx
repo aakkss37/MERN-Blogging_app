@@ -48,8 +48,8 @@ const Login = () => {
 				{haveAccount ?
 					<Wrapper>
 						{isNewAccountCreated && <Text style={{ color: 'green' }}>Congratulations! Your account has been cteated successfully. Please Login.</Text>}
-						<TextField variant="standard" name='username' label='Enter Username' />
-						<TextField variant="standard" name='password' label='Enter Password' />
+						<TextField variant="standard" name='username' label='Enter Username' value={signUpInput.name}/>
+						<TextField variant="standard" name='password' label='Enter Password' value={signUpInput.password}/>
 						<LoginButton variant="contained" >Login</LoginButton>
 						<Text style={{ textAlign: 'center' }}>OR</Text>
 						<SignupButton style={{ marginBottom: 50 }} onClick={() => { setHaveAccount(false) }}>Create an account</SignupButton>
@@ -57,9 +57,9 @@ const Login = () => {
 					:
 					<Wrapper>
 						{isError && <Text style={{ color: 'red' }}>Oops.. Something went wrong, Please try again.</Text>}
-						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='name' label='Enter Name' required />
-						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='userName' label='Enter Username' required />
-						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='password' label='Enter Password' required />
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='name' label='Enter Name' required value={signUpInput.name}/>
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='userName' label='Enter Username' required value={signUpInput.userName}/>
+						<TextField variant="standard" onChange={(e) => signUpInputHandler(e)} name='password' label='Enter Password' required value={signUpInput.password}/>
 						<SignupButton onClick={signupUser} >Signup</SignupButton>
 						<Text style={{ textAlign: 'center' }}>OR</Text>
 						<LoginButton variant="contained" onClick={() => { setHaveAccount(true) }}>Already have an account</LoginButton>
