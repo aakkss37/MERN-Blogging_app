@@ -4,7 +4,7 @@ import { Component, LoginContainer, Image, Wrapper, LoginButton, SignupButton, T
 import { TextField } from '@mui/material';
 import { API } from '../../services/api';
 import { DataContext } from '../../context/DataProvider';
-
+import { useNavigate } from 'react-router-dom';
 
 
 // INITIAL STATES
@@ -29,6 +29,7 @@ const Login = () => {
 	const [isNewAccountCreated, setIsNewAccountCreated] = useState(false)
 	const { setUserAccount } = useContext(DataContext); // setting user detail state by context.
 
+	const navigate = useNavigate();
 
 
 
@@ -81,6 +82,7 @@ const Login = () => {
 				userName: responce.data.userName,
 				name: responce.data.name
 			})
+			navigate('/home')
 
 		} catch (error) {
 

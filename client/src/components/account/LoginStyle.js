@@ -13,12 +13,16 @@ export const Component = styled(Box)`
 export const LoginContainer = styled(Box)`
 	width: 500px;
     box-shadow: 4px 0px 4px 03px rgb(0 0 0/ 0.3);
+	display: flex;
+    flex-direction: column;
+    justify-content: center; 
+	align-item: center;
 `
 
 export const Image = styled('img')({
 	width: 250,
 	margin: 'auto',
-	padding: '50px 0 0'
+	padding: '50px 0 0',
 });
 
 export const Wrapper = styled(Box)`
@@ -51,6 +55,9 @@ export const SignupButton = styled(Button)`
     height: 48px;
     border-radius: 2px;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+	&:hover{
+    background: rgb(239 239 239);
+  }
 `;
 
 export const Text = styled(Typography)`
