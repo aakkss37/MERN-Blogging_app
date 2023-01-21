@@ -40,7 +40,7 @@ const Login = () => {
 	const loginInputHandler = (e)=>{
 		setLoginInput({...loginInput, [e.target.name]: e.target.value});
 	}
-	console.log(loginInput);
+	// console.log(loginInput);
 
 
 	// API CALLS
@@ -62,12 +62,13 @@ const Login = () => {
 	const loginUser = async () => {
 		try {
 			let responce = await API.userLogin(loginInput);
-			console.log("responce <-------- ", responce,)
+			console.log("responce <-------- ", responce)
+			console.log(responce.data, "======")
 			setLoginInput(initialLoginValue);
 			setIsError(false);
 			setIsNewAccountCreated(true);
-			sessionStorage.setItem('accessToken', `Bearer ${responce.data.accessToken}`) //SESSION STORAGE
-			sessionStorage.setItem('refreshToken', `Bearer ${responce.data.rerefreshToken}`)
+			sessionStorage.setItem('accessToken', `Bearer ${responce.data.accessTokan}`) //SESSION STORAGE
+			sessionStorage.setItem('refreshToken', `Bearer ${responce.data.refreshToken}`)
 		} catch (error) {
 			console.log("error ----> ", error);
 			setIsError(true);
