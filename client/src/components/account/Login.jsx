@@ -4,28 +4,46 @@ import { Component, LoginContainer, Image, Wrapper, LoginButton, SignupButton, T
 import { TextField } from '@mui/material';
 import { API } from '../../services/api';
 
+
+// INITIAL STATES
+const initialLoginValue = {
+	userName: '',
+	password: ''
+}
 const initialSignUpValue = {
 	name: '',
 	userName: '',
 	password: ''
 }
 
+
 const Login = () => {
 
+	// STATES
 	const [haveAccount, setHaveAccount] = useState(true);
 	const [signUpInput, setSignUpInput] = useState(initialSignUpValue);
+	const [loginInput, setLoginInput] = useState(initialLoginValue);
 	const [isError, setIsError] = useState(false);
 	const [isNewAccountCreated, setIsNewAccountCreated]  = useState(false)
 
+
+	// EVENT HANDLER
 	const signUpInputHandler = (e) => {
 		// const inputName = e.target.name;
 		// const inputValue = e.target.value;
 		// const obj = {inputName: inputValue} ----> "inputName" itself becone a key name here rether then taking value if "inputName" given above.
 		// const obj = {[inputName]: inputValue} ----> to do so, we have to keep inputName in [] square bracket.. then it will make the key name as the value if inputName.
 		// console.log(obj);
-		setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value });
+		setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value }); //this square bracket is not to making it array..hehehe.. 
+																			 //in js object to make the property name as variable.. it should be covered with []. 
 	}
+	const loginInputHandler = (e)=>{
+		setLoginInput({...loginInput, [e.target.name]: e.target.value});
+	}
+	console.log(loginInput);
 
+
+	// API CALLS
 	const signupUser = async () => {
 		try {
 			let responce = await API.userSignup(signUpInput);
@@ -48,8 +66,8 @@ const Login = () => {
 				{haveAccount ?
 					<Wrapper>
 						{isNewAccountCreated && <Text style={{ color: 'green' }}>Congratulations! Your account has been cteated successfully. Please Login.</Text>}
-						<TextField variant="standard" name='username' label='Enter Username' value={signUpInput.name}/>
-						<TextField variant="standard" name='password' label='Enter Password' value={signUpInput.password}/>
+						<TextField variant="standard" onChange={(e) => loginInputHandler(e)} name='userName' label='Enter Username' value={loginInput.userName}/>
+						<TextField variant="standard" onChange={(e) => loginInputHandler(e)} name='password' label='Enter Password' value={loginInput.password}/>
 						<LoginButton variant="contained" >Login</LoginButton>
 						<Text style={{ textAlign: 'center' }}>OR</Text>
 						<SignupButton style={{ marginBottom: 50 }} onClick={() => { setHaveAccount(false) }}>Create an account</SignupButton>
