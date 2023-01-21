@@ -66,6 +66,8 @@ const Login = () => {
 			setLoginInput(initialLoginValue);
 			setIsError(false);
 			setIsNewAccountCreated(true);
+			sessionStorage.setItem('accessToken', `Bearer ${responce.data.accessToken}`) //SESSION STORAGE
+			sessionStorage.setItem('refreshToken', `Bearer ${responce.data.rerefreshToken}`)
 		} catch (error) {
 			console.log("error ----> ", error);
 			setIsError(true);
