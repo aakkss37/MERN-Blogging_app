@@ -59,16 +59,32 @@ const Login = () => {
 			
 	}
 
+	const loginUser = async () => {
+		try {
+			let responce = await API.userLogin(loginInput);
+			console.log("responce <-------- ", responce,)
+			setLoginInput(initialLoginValue);
+			setIsError(false);
+			setIsNewAccountCreated(true);
+		} catch (error) {
+			console.log("error ----> ", error);
+			setIsError(true);
+		}
+
+	}
+
+
 	return (
 		<Component>
 			<LoginContainer>
 				<Image src={image} alt="blog" />
 				{haveAccount ?
 					<Wrapper>
+						{isError && <Text style={{ color: 'red' }}>Oops.. Something went wrong, Please try again.</Text>}
 						{isNewAccountCreated && <Text style={{ color: 'green' }}>Congratulations! Your account has been cteated successfully. Please Login.</Text>}
 						<TextField variant="standard" onChange={(e) => loginInputHandler(e)} name='userName' label='Enter Username' value={loginInput.userName}/>
 						<TextField variant="standard" onChange={(e) => loginInputHandler(e)} name='password' label='Enter Password' value={loginInput.password}/>
-						<LoginButton variant="contained" >Login</LoginButton>
+						<LoginButton variant="contained" onClick={loginUser}>Login</LoginButton>
 						<Text style={{ textAlign: 'center' }}>OR</Text>
 						<SignupButton style={{ marginBottom: 50 }} onClick={() => { setHaveAccount(false) }}>Create an account</SignupButton>
 					</Wrapper>
