@@ -80,9 +80,9 @@ const CreatePost = () => {
 
 
 	const blogInputChangeHndler = (e)=>{
+		setPostData({...postData, [e.target.name]: e.target.value});
 
-	}
-
+	};
 	return (
 		<Container>
 
@@ -96,8 +96,9 @@ const CreatePost = () => {
 				<input type='file' id='fileInput' style={{ display: 'none' }} />
 				<StyledInputBase 
 					placeholder="Enter Blog Tile here..."  
-					onClick={blogInputChangeHndler}
+					onChange={blogInputChangeHndler}
 					name='title'
+					value={postData.title}
 				/>
 				<StyledButton>Publish</StyledButton>
 			</StyledFormControl>
@@ -105,8 +106,9 @@ const CreatePost = () => {
 			<StyledTextArea 
 				minRows={10}
 				placeholder= "What's your story...."
-				onClick={blogInputChangeHndler}
+				onChange={blogInputChangeHndler}
 				name='blogStory'
+				value={postData.blogStory}
 			/>
 
 		</Container>
