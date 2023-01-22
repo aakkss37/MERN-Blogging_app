@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { AddCircle as Add } from '@mui/icons-material';
 import img from '../../assets/img8.jpg';
 import {Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
 import {  useSearchParams } from 'react-router-dom';
+import { DataContext } from '../../context/DataProvider';
 
 
 
 const initialPostData = {
+	name: '',
 	title: '',
 	blogStory: '',
 	displayPic: '',
@@ -22,7 +24,9 @@ const CreatePost = () => {
 	const [displayPicture, setDisplayPicture] = useState('');
 	const [searchParams] = useSearchParams();
 	const category = searchParams.get('category');
-	console.log(category)
+	const { userAccount } = useContext(DataContext)
+	// console.log(userAccount);
+
 	useEffect(()=>{
 		const getImage = ()=>{
 			if(displayPicture){
@@ -34,16 +38,20 @@ const CreatePost = () => {
 				postData.displayPic = '' //TODO
 			}
 		}
+		// console.log(displayPicture);
 		getImage();
-		// displayPicture.category;
-		
 
-	}, [displayPicture])
+		// UPDATE postData FIELDS
+		postData.category = category;
+		postData.name = userAccount.name;
+		postData.userName = userAccount.userName;
+
+		console.log("updated ====>>> ",postData);
+	}, [category, displayPicture] )
 
 	const blogInputChangeHndler = (e)=>{
 		setPostData({...postData, [e.target.name]: e.target.value});
 	};
-
 
 	return (
 		<Container>
@@ -52,10 +60,10 @@ const CreatePost = () => {
 
 			<StyledFormControl>
 				<Label htmlFor='fileInput'>
-					<Add fontSize='large' color='action' onChange={(e)=>setDisplayPicture(e.target.file[0])}/>
+					<Add fontSize='large' color='action' />
 					<span>Display Pic</span>
 				</Label>
-				<input type='file' id='fileInput' style={{ display: 'none' }} />
+				<input type='file' id='fileInput' style={{ display: 'none' }} onChange={(e) => setDisplayPicture(e.target.files[0])} />
 				<StyledInputBase 
 					placeholder="Enter Blog Tile here..."  
 					onChange={blogInputChangeHndler}

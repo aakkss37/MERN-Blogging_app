@@ -43,5 +43,9 @@ export const SERVICE_URL = {
 	userLogin: {
 		url: '/login',
 		method: 'POST',
-	}
+	},
+	uploadDisplayPicture: {
+		url: '/upload/picture',
+		method: 'POST'
+	},
 }
