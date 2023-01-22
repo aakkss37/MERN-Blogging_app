@@ -75,7 +75,6 @@ const Login = (props) => {
 			// console.log(responce.data, "======")
 			setLoginInput(initialLoginValue);
 			setIsError(false);
-			setIsNewAccountCreated(true);
 			sessionStorage.setItem('accessToken', `Bearer ${responce.data.accessTokan}`) //SESSION STORAGE
 			sessionStorage.setItem('refreshToken', `Bearer ${responce.data.refreshToken}`)
 			setUserAccount({

@@ -1,9 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AddCircle as Add } from '@mui/icons-material';
 import img from '../../assets/img8.jpg';
-import {Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
-import {  useSearchParams } from 'react-router-dom';
+import { Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
+import { useSearchParams } from 'react-router-dom';
 import { DataContext } from '../../context/DataProvider';
+import { API } from '../../services/api';
 
 
 
@@ -16,7 +17,7 @@ const initialPostData = {
 	category: '',
 	createdDate: new Date()
 }
- 
+
 
 
 const CreatePost = () => {
@@ -27,18 +28,20 @@ const CreatePost = () => {
 	const { userAccount } = useContext(DataContext)
 	// console.log(userAccount);
 
+
 	useEffect(()=>{
-		const getImage = ()=>{
+		const getImage = async ()=>{
 			if(displayPicture){
 				const data = new FormData();
 				data.append("name", displayPicture.name);
 				data.append("dispalyPicture", displayPicture);
 
 				//API CALL
-				postData.displayPic = '' //TODO
+				const responce = await API.uploadDisplayPicture(data) //return a url of the pic
+				postData.displayPic = responce.data;
 			}
 		}
-		// console.log(displayPicture);
+		console.log("dispalyPicture ----->>>",displayPicture);
 		getImage();
 
 		// UPDATE postData FIELDS
@@ -49,14 +52,21 @@ const CreatePost = () => {
 		console.log("updated ====>>> ",postData);
 	}, [category, displayPicture] )
 
-	const blogInputChangeHndler = (e)=>{
-		setPostData({...postData, [e.target.name]: e.target.value});
+
+
+
+
+	const blogInputChangeHndler = (e) => {
+		setPostData({ ...postData, [e.target.name]: e.target.value });
 	};
+
+
+	const imageUrl = postData.displayPic ? postData.displayPic : img  // --> display picture url
 
 	return (
 		<Container>
 
-			<Image src={img} alt="post" />
+			<Image src={imageUrl} alt="post" />
 
 			<StyledFormControl>
 				<Label htmlFor='fileInput'>
@@ -64,18 +74,18 @@ const CreatePost = () => {
 					<span>Display Pic</span>
 				</Label>
 				<input type='file' id='fileInput' style={{ display: 'none' }} onChange={(e) => setDisplayPicture(e.target.files[0])} />
-				<StyledInputBase 
-					placeholder="Enter Blog Tile here..."  
+				<StyledInputBase
+					placeholder="Enter Blog Tile here..."
 					onChange={blogInputChangeHndler}
 					name='title'
 					value={postData.title}
 				/>
 				<StyledButton>Publish</StyledButton>
 			</StyledFormControl>
-			
-			<StyledTextArea 
+
+			<StyledTextArea
 				minRows={5}
-				placeholder= "What's your story...."
+				placeholder="What's your story...."
 				onChange={blogInputChangeHndler}
 				name='blogStory'
 				value={postData.blogStory}
