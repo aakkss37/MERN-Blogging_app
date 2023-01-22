@@ -4,7 +4,7 @@ import { Button, Table, TableHead, TableRow, TableCell, TableBody, styled } from
 import { Link, useSearchParams } from 'react-router-dom';
 
 const StyledTable = styled(Table)`
-    border: 1px solid rgba(224, 224, 224, 1);
+    border: 2px solid rgba(215, 215, 215, 2);
 `;
 
 const StyledButton = styled(Button)`
@@ -15,7 +15,7 @@ const StyledButton = styled(Button)`
 	font-weight: 800;
     text-decoration: none;
 	&:hover{
-		background: rgb(135 210 200)
+		background: rgb(110 210 200)
 	}
 `;
 
@@ -36,7 +36,7 @@ const Categories = () => {
 	return (
 		<>
 			<Link to={`/create?category=${category || ''}`} style={{ textDecoration: 'none' }}>
-				<StyledButton variant="contained">Create Blog</StyledButton>
+				<StyledButton >Create Blog</StyledButton>
 			</Link>
 
 			<StyledTable>
