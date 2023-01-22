@@ -1,7 +1,7 @@
 
 
 import { Button, Table, TableHead, TableRow, TableCell, TableBody, styled } from '@mui/material';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link,  } from 'react-router-dom';
 
 const StyledTable = styled(Table)`
     border: 2px solid rgba(215, 215, 215, 2);
@@ -30,8 +30,6 @@ const categories = [
 
 
 const Categories = () => {
-	const [searchParams] = useSearchParams();
-	const category = searchParams.get('category');
 
 	return (
 		<>
