@@ -31,12 +31,15 @@ function App () {
 				<div className="App" style={{ marginTop: 64 }}>
 					<Routes>
 						<Route path='/login' element={<Login setUserAuthanticated={setUserAuthanticated} />} />
+
 						<Route path='/home' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
 							<Route path='/home' element={<Home />} />
 						</Route>
+
 						<Route path='/create-new-post' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
 							<Route path='/create-new-post' element={<CreatePost />} />
 						</Route>
+						
 					</Routes>
 				</div>
 			</BrowserRouter>

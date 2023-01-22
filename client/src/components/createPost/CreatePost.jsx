@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { AddCircle as Add } from '@mui/icons-material';
 import img from '../../assets/img8.jpg';
 import {Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
-
+import {  useSearchParams } from 'react-router-dom';
 
 
 
@@ -19,12 +19,32 @@ const initialPostData = {
 
 const CreatePost = () => {
 	const [postData, setPostData] = useState(initialPostData)
+	const [displayPicture, setDisplayPicture] = useState('');
+	const [searchParams] = useSearchParams();
+	const category = searchParams.get('category');
+	console.log(category)
+	useEffect(()=>{
+		const getImage = ()=>{
+			if(displayPicture){
+				const data = new FormData();
+				data.append("name", displayPicture.name);
+				data.append("dispalyPicture", displayPicture);
 
+				//API CALL
+				postData.displayPic = '' //TODO
+			}
+		}
+		getImage();
+		// displayPicture.category;
+		
+
+	}, [displayPicture])
 
 	const blogInputChangeHndler = (e)=>{
 		setPostData({...postData, [e.target.name]: e.target.value});
-
 	};
+
+
 	return (
 		<Container>
 
@@ -32,7 +52,7 @@ const CreatePost = () => {
 
 			<StyledFormControl>
 				<Label htmlFor='fileInput'>
-					<Add fontSize='large' color='action' />
+					<Add fontSize='large' color='action' onChange={(e)=>setDisplayPicture(e.target.file[0])}/>
 					<span>Display Pic</span>
 				</Label>
 				<input type='file' id='fileInput' style={{ display: 'none' }} />

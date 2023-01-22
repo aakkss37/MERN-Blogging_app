@@ -1,24 +1,30 @@
 
 
-import { Button, Table, TableHead, TableRow, TableCell, TableBody, styled } from '@mui/material';
-import { Link,  } from 'react-router-dom';
+import { Table, TableHead, TableRow, TableCell, TableBody, styled } from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 const StyledTable = styled(Table)`
     border: 2px solid rgba(215, 215, 215, 2);
+	background: white;
 `;
 
-const StyledButton = styled(Button)`
-    margin: 20px;
-    width: 85%;
-    background: rgb(155 210 200);
-    color: rgb(68 80 69);
-	font-weight: 800;
+
+const StyledTableCell = styled(TableCell)`
+	background: rgb(24 24 24);
+    color: rgb(155 210 200);
+	font-weight: 600;
     text-decoration: none;
+	text-align: center;
+	font-size: 20px;
+`
+const StyledTableCellOptions = styled(TableCell)`
+	font-weight: 600;
+	color: rgb(24 24 24);
 	&:hover{
-		background: rgb(110 210 200)
+		background-color: rgb(233 233 233);
+		cursor: pointer;
 	}
-`;
-
+`
 
 const categories = [
 	{ id: 1, type: "Music" },
@@ -31,27 +37,30 @@ const categories = [
 
 const Categories = () => {
 
+
+	const navigateTo = useNavigate();
+	const navigateToCreatePost = (categoryType)=> {
+		let path = `/create-new-post/?category=${categoryType}`;
+		navigateTo(path)
+	}
+	
 	return (
 		<>
-			<Link to={'/create-new-post'} style={{ textDecoration: 'none' }}>
-				<StyledButton >Create Blog</StyledButton>
-			</Link>
-
 			<StyledTable>
 				<TableHead>
 					<TableRow>
-						<TableCell>
-								All Categories
-						</TableCell>
+						<StyledTableCell>
+							Create Post
+						</StyledTableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{
 						categories.map(category => (
 							<TableRow key={category.id}>
-								<TableCell>
+								<StyledTableCellOptions onClick={() => navigateToCreatePost(category.type)}>
 										{category.type}
-								</TableCell>
+								</StyledTableCellOptions>
 							</TableRow>
 						))
 					}

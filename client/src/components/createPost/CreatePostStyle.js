@@ -21,7 +21,7 @@ export const StyledFormControl = styled(FormControl)`
 `
 
 export const Image = styled('img')({
-	width: '99%',
+	width: '100%',
 	height: '50vh',
 	objectFit: 'cover'
 });
@@ -56,7 +56,7 @@ export const StyledTextArea = styled(TextareaAutosize)`
 	width: 91%;
 	margin: 50px;
 	font-size: 18px;
-	// border: none;
+	border: none;
 	background-color: rgb(233, 233, 233);
 	&:focus-visible {
 		outline: none;
