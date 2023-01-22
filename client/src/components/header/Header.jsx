@@ -10,7 +10,7 @@ const Header = () => {
 			<Container>
 				<div>
 					<Link to='/home'><Image src={image} alt="blog" /></Link>
-					<Link to='/'>HOME</Link>
+					<Link to='/home'>HOME</Link>
 					<Link to='/about'>ABOUT</Link>
 					<Link to='/contact'>CONTACT</Link>
 				</div>

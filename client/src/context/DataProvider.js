@@ -4,7 +4,7 @@ export const DataContext = createContext(null);
 
 const DataProvider = (props)=>{
 	const [userAccount, setUserAccount]= useState({userName: '', name: ''});
-	console.log("loged in account ----> ", userAccount)
+	// console.log("loged in account ----> ", userAccount)
 
 	return (
 		<DataContext.Provider value={{userAccount, setUserAccount}}>
