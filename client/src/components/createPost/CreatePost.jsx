@@ -36,7 +36,7 @@ const CreatePost = () => {
 				</Label>
 				<input type='file' id='fileInput' style={{ display: 'none' }} />
 			</FormControl>
-		</Container>
+		</Container> 
 	)
 }
 
