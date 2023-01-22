@@ -21,7 +21,7 @@ const StyledFormControl = styled(FormControl)`
 `
 
 const Image = styled('img')({
-	width: '100%',
+	width: '99%',
 	height: '50vh',
 	objectFit: 'cover'
 });
@@ -53,10 +53,10 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledTextArea = styled(TextareaAutosize)`
-	width: 100%;
+	width: 91%;
 	margin: 50px;
 	font-size: 18px;
-	border: none;
+	// border: none;
 	background-color: rgb(233, 233, 233);
 	&:focus-visible {
 		outline: none;
@@ -104,7 +104,7 @@ const CreatePost = () => {
 			</StyledFormControl>
 			
 			<StyledTextArea 
-				minRows={10}
+				minRows={5}
 				placeholder= "What's your story...."
 				onChange={blogInputChangeHndler}
 				name='blogStory'
