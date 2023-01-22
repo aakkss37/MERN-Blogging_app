@@ -3,6 +3,7 @@ import img from '../../assets/img8.jpg';
 import { Box, styled, } from '@mui/system';
 import { Button, FormControl, InputBase } from '@mui/material';
 import { AddCircle as Add } from '@mui/icons-material';
+import QuillEditor from './RichText';
 
 const Container = styled(Box)(({ theme }) => ({
 	margin: '50px 0px',
@@ -38,6 +39,7 @@ const Label = styled('label')({
 const StyledInputBase = styled(InputBase)`
 	border-bottom: 2px solid rgb(107 107 107);
 	font-size: 1.3rem;
+	font-weight: 800;
 `
 
 const StyledButton = styled(Button)`
@@ -50,7 +52,6 @@ const StyledButton = styled(Button)`
 		color: rgb(155 210 200);
 	}
 `;
-
 const CreatePost = () => {
 
 	return (
@@ -65,6 +66,9 @@ const CreatePost = () => {
 				<StyledInputBase placeholder="Enter Blog Tile here..." />
 				<StyledButton>Publish</StyledButton>
 			</StyledFormControl>
+			<div style={{ paddingLeft: "100px", paddingRight: "100px" }}>
+				<QuillEditor />
+			</div>
 		</Container>
 	)
 }
