@@ -32,9 +32,6 @@ const API_URL = 'http://localhost:8000';
 const axiosInstance = axios.create({ // axios.create --> You can create a new instance of axios with a custom config.
 	baseURL: API_URL,
 	timeout: 10000,
-	headers: {
-		"content-type": "application/json"
-	}
 });
 
 
