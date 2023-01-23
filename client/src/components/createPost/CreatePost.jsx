@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { AddCircle as Add } from '@mui/icons-material';
 import { Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
 import { useSearchParams } from 'react-router-dom';
@@ -36,22 +37,16 @@ const initialPostData = {
 const CreatePost = () => {
 	const [postData, setPostData] = useState(initialPostData)
 	const [displayPicture, setDisplayPicture] = useState('');
-	const [imageFileName, setImageFileName] = useState('');
 	const [searchParams] = useSearchParams();
 	const category = searchParams.get('category');
-	const { userAccount } = useContext(DataContext)
-	// console.log(userAccount);
+	const { userAccount } = useContext(DataContext);
 
 
 	useEffect(() => {
 		const getImage = async () => {
 			if (displayPicture) {
-				// const data = {
-				// 	name: displayPicture.name,
-				// 	dispalyPicture: displayPicture
-				// }
 				const data = new FormData();
-				data.append("name", imageFileName);
+				data.append("name", displayPicture.name);
 				data.append("dispalyPicture", displayPicture);
 
 				//API CALL
@@ -59,7 +54,6 @@ const CreatePost = () => {
 				postData.displayPic = responce.data;
 			}
 		}
-		// console.log("dispalyPicture ----->>>",displayPicture);
 		getImage();
 
 		// UPDATE postData FIELDS
@@ -77,18 +71,6 @@ const CreatePost = () => {
 	const blogInputChangeHndler = (e) => {
 		setPostData({ ...postData, [e.target.name]: e.target.value });
 	};
-
-
-
-	const imageChangeHandler = (e) => {
-		const imageFile = e.target.files[0];
-		setImageFileName(imageFile.name);
-		const reader = new FileReader();
-		reader.readAsArrayBuffer(imageFile);
-		reader.onloadend = () => {
-			setDisplayPicture(new Uint8Array(reader.result));
-		};
-	}
 
 
 	//defaultImages[category] ---> we can use the dot notation (.) to access properties
@@ -114,7 +96,7 @@ const CreatePost = () => {
 					type='file'
 					id='fileInput'
 					style={{ display: 'none' }}
-					onChange={imageChangeHandler}
+					onChange={(e)=> setDisplayPicture(e.target.files[0])}
 				/>
 
 				<StyledInputBase
