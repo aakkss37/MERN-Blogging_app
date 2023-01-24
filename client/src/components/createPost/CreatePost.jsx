@@ -46,7 +46,7 @@ const CreatePost = () => {
 			if (displayPicture) {
 				const data = new FormData();
 				data.append("name", displayPicture.name);
-				data.append("dispalyPicture", displayPicture);
+				data.append("file", displayPicture);
 
 				//API CALL
 				const responce = await API.uploadDisplayPicture(data) //return a url of the pic

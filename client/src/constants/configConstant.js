@@ -45,7 +45,7 @@ export const SERVICE_URL = {
 		method: 'POST',
 	},
 	uploadDisplayPicture: {
-		url: '/upload/picture',
+		url: 'file/upload',
 		method: 'POST'
 	},
 }

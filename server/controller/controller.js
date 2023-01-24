@@ -7,8 +7,8 @@ dotenv.config();
 
 
 export const signupUser = async (request, responce) => {
-	console.log('request received ---> signup');
-	console.log("signup userInput: ---> ", request.body)
+	// console.log('request received ---> signup');
+	// console.log("signup userInput: ---> ", request.body)
 	try {
 		const encryptedPassword = await bcrypt.hash(request.body.password, 10); // --> bcrypt(password, salt_value)
 		const newUserDetail = {
@@ -16,7 +16,7 @@ export const signupUser = async (request, responce) => {
 			userName: request.body.userName,
 			password: encryptedPassword
 		}
-		console.log("serverGenerated: ---> ", newUserDetail);
+		// console.log("serverGenerated: ---> ", newUserDetail);
 		const newUser = await User.create(newUserDetail);
 		await newUser.save();
 		return responce.status(200).json({ msg: 'signup sucessfull' });
