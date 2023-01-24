@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { AddCircle as Add } from '@mui/icons-material';
 import { Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
 import { useSearchParams } from 'react-router-dom';
@@ -51,7 +50,9 @@ const CreatePost = () => {
 
 				//API CALL
 				const responce = await API.uploadDisplayPicture(data) //return a url of the pic
-				postData.displayPic = responce.data;
+
+				// postData.displayPic = responce.data;
+				console.log(responce.data)
 			}
 		}
 		getImage();
@@ -62,7 +63,7 @@ const CreatePost = () => {
 		postData.userName = userAccount.userName;
 
 		// console.log("updated ====>>> ",postData);
-	}, [category, displayPicture])
+	}, [category, displayPicture, postData, userAccount.name, userAccount.userName])
 
 
 
