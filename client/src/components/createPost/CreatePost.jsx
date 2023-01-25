@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AddCircle as Add } from '@mui/icons-material';
 import { Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './CreatePostStyle'
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { DataContext } from '../../context/DataProvider';
 import { API } from '../../services/api';
 // DEFAULT DISPLAY PICTURE.
@@ -35,54 +35,56 @@ const initialPostData = {
 
 const CreatePost = () => {
 	const [postData, setPostData] = useState(initialPostData)
-	const [displayPicture, setDisplayPicture] = useState('');
-	// const [displayPicURL, setDisplayPicURL] = useState('');
 	const [searchParams] = useSearchParams();
 	const category = searchParams.get('category');
 	const { userAccount } = useContext(DataContext);
-	// const updateImage = ()=>{
-	// 	setPostData((prevPostData)=>( {...prevPostData, displayPic: displayPicURL}))
-	// }
-	// console.log("displayPicURL =====>>>>>>>>>>>>>",displayPicURL)
+	const navigate = useNavigate();
+
+	// console.log("postData before ===> ", postData);
+
+	// const [displayPicURL, setDisplayPicURL] = useState('');
+
+	const updateImage = async (file) => {
+		const data = new FormData();
+		data.append("name", file.name);
+		data.append("file", file);
+		// API CALL
+		const responce = await API.uploadDisplayPicture(data); //return a url of the pic
+		console.log("responce ===> ", responce.data);
+		// postData.displayPic = responce.data;
+		setPostData((prevPostData) => {
+			return {
+				...prevPostData,
+				displayPic: responce.data,
+			}
+		});
+
+	}
 
 	useEffect(() => {
-		const getImage = async () => {
-			if (displayPicture) {
-				// console.log("before ===> ", postData);
-				const data = new FormData();
-				data.append("name", displayPicture.name);
-				data.append("file", displayPicture);
-				//API CALL
-				const responce = await API.uploadDisplayPicture(data); //return a url of the pic
-				console.log("responce ===> ",responce.data);
-				postData.displayPic = responce.data;
-				// setPostData((prevPostData) => { 
-				// 	return {
-				// 		...prevPostData, 
-				// 		displayPic: responce.data,
-				// 		category: category,
-				// 		name: userAccount.name,
-				// 		userName: userAccount.userName,
-				// 	}} );
-			}
-		}
-		getImage();
-		// updateImage();
 		// UPDATE postData FIELDS
 		postData.category = category;
 		postData.name = userAccount.name;
 		postData.userName = userAccount.userName;
-	}, [category, displayPicture, postData, userAccount.name, userAccount.userName]);
+	});
 
-	console.log("outside useEffect ===> ", postData);
-
+	// console.log("postData after ===> ", postData);
 
 	const blogInputChangeHndler = (e) => {
 		setPostData({ ...postData, [e.target.name]: e.target.value });
 	};
 
+	const savePost = async()=>{
+		try {
+			const responce = await API.createPost(postData);
+			console.log(responce);
+			navigate('/home');
+		} catch (error) {
+			console.log("something went wrong while crating a new post -->", error.message );
+		}
+	}
 
-	
+
 	//defaultImages[category] ---> we can use the dot notation (.) to access properties
 	//of an object,however, when you use the dot notation, you need to know the exact
 	// name of the property in advance.
@@ -91,7 +93,7 @@ const CreatePost = () => {
 	//because the bracket notation allows you to use a variable as the key to 
 	//access the property.
 	let imageUrl = postData.displayPic ? postData.displayPic : defaultImages[category]; 	// --> display picture url
-console.log("imageURL ===>>>>>>>>>>", imageUrl);
+	console.log("imageURL ===>>>>>>>>>>", imageUrl);
 	return (
 		<Container>
 
@@ -106,7 +108,7 @@ console.log("imageURL ===>>>>>>>>>>", imageUrl);
 					type='file'
 					id='fileInput'
 					style={{ display: 'none' }}
-					onChange={(e)=> setDisplayPicture(e.target.files[0])}
+					onChange={(e) => updateImage(e.target.files[0])}
 				/>
 
 				<StyledInputBase
@@ -115,7 +117,7 @@ console.log("imageURL ===>>>>>>>>>>", imageUrl);
 					name='title'
 					value={postData.title}
 				/>
-				<StyledButton>Publish</StyledButton>
+				<StyledButton onClick={savePost}>Publish</StyledButton>
 			</StyledFormControl>
 
 			<StyledTextArea

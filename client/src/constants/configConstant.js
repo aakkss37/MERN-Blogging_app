@@ -48,4 +48,8 @@ export const SERVICE_URL = {
 		url: 'file/upload',
 		method: 'POST'
 	},
+	createPost: {
+		url: '/create',
+		method: 'POST'
+	},
 }
