@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './banner/Banner';
 import { Grid } from '@mui/material';
 import Categories from './Categories';
+import Posts from './post/Posts';
 
 const Home = () => {
 
@@ -13,7 +14,7 @@ const Home = () => {
 					<Categories />
 				</Grid>
 				<Grid container item xs={12} sm={10} lg={10}>
-					jhatu post
+					<Posts/>
 				</Grid>
 			</Grid>
 		</>
