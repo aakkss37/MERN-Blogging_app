@@ -52,4 +52,8 @@ export const SERVICE_URL = {
 		url: '/create',
 		method: 'POST'
 	},
+	getAllPosts: {
+		url: 'posts',
+		method: 'GET'
+	},
 }
