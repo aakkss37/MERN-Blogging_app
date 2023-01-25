@@ -25,6 +25,7 @@ const Posts = () => {
 		?
 		posts.map(post => (
 			<PostCard
+				key={post._id}
 				picture={post.displayPic}
 				category={post.category}
 				title={post.title}
