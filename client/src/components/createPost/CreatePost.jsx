@@ -61,9 +61,12 @@ const CreatePost = () => {
 
 	}
 
+
+
 	useEffect(() => {
 		// UPDATE postData FIELDS
 		postData.category = category;
+		postData.displayPic = defaultImages[category];
 		postData.name = userAccount.name;
 		postData.userName = userAccount.userName;
 	});
@@ -83,7 +86,6 @@ const CreatePost = () => {
 			console.log("something went wrong while crating a new post -->", error );
 		}
 	}
-
 
 	//defaultImages[category] ---> we can use the dot notation (.) to access properties
 	//of an object,however, when you use the dot notation, you need to know the exact
