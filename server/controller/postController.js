@@ -1,3 +1,15 @@
-export const createPost = async(request, responce)=>{
+import Posts from "../model/postsModel.js";
 
+export const createPost = async(request, responce)=>{
+	try {
+		console.log("****request received****")
+		// console.log("body ==>", request.body)
+		const post = await Posts.create(request.body);
+		console.log("data posted =-=-=-=->>>>", post);
+		post.save();
+		return responce.status(200).json({msg: "New post successfully created"});
+	} catch (error) {
+		console.log(error.message)
+		return responce.status(500).json({ msg: 'Error while creating new post...' });
+	}
 }

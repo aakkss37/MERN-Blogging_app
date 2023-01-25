@@ -80,7 +80,7 @@ const CreatePost = () => {
 			console.log(responce);
 			navigate('/home');
 		} catch (error) {
-			console.log("something went wrong while crating a new post -->", error.message );
+			console.log("something went wrong while crating a new post -->", error );
 		}
 	}
 
