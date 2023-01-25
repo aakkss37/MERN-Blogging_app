@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_NOTIFICATION_MESSAGE, SERVICE_URL } from '../constants/configConstant';
-
+import { getAccessToken } from '../utils/commenUtils';
 
 /*
 This code defines an API object that contains functions for making various types of HTTP 
@@ -138,6 +138,9 @@ for(const [key, value] of Object.entries(SERVICE_URL)){
 			method: value.method,
 			data: body,
 			responseType: value.responceType,
+			headers: {
+				authorization: getAccessToken()
+			},
 			onUploadProgress: (ProgressEvent)=>{
 				if(showUploadProgress){
 					let percentComplete = Math.round((ProgressEvent.loaded*100)/ProgressEvent.total);
