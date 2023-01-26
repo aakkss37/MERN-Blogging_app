@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { Box, Typography } from '@mui/material'
 import React from 'react'
+import { Details, Heading, Image, Text, Card, Username } from './PostCardStyle'
+import { addElipsis } from '../../../utils/commenUtils'
 
 const PostCard = (props) => {
-  return (
-	<Box>
-		<img src={props.picture} alt="Display Picture"/>
-		<Typography>{props.category}</Typography>
-		<Typography>{props.title}</Typography>
-		<Typography>{props.name}</Typography>
-		  <Typography>{props.username}</Typography>
-		  <Typography>{props.discription}</Typography>
-	</Box>
-  )
+	return (
+		<Card>
+			<Image src={props.picture} alt="Display Picture" />
+			<Text>{props.category}</Text>
+			<Heading>{addElipsis(props.title, 20)}</Heading>
+			<Text>{props.name}</Text>
+			<Username>Username: {props.username}</Username>
+			<Details>{addElipsis(props.discription, 100)}</Details>
+		</Card>
+	)
 }
 
 export default PostCard
