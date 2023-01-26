@@ -3,6 +3,16 @@ import Banner from './banner/Banner';
 import { Grid } from '@mui/material';
 import Categories from './Categories';
 import Posts from './post/Posts';
+import Filter from './filter/Filter';
+import { width } from '@mui/system';
+
+
+const postContainer = {
+	display: 'flex',
+	flexDirection: "column",
+	width: '100%',
+}
+
 
 const Home = () => {
 
@@ -14,7 +24,10 @@ const Home = () => {
 					<Categories />
 				</Grid>
 				<Grid container item xs={12} sm={10} lg={10}>
-					<Posts/>
+					<div style={postContainer}>
+						<Filter />
+						<Posts />
+					</div>
 				</Grid>
 			</Grid>
 		</>
