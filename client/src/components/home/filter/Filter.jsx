@@ -12,7 +12,7 @@ const options = [
 ];
 
 const Filter = () => {
-	const { filterCtegory, setFilterCategory } = useContext(DataContext);
+	const { filterCategory, setFilterCategory } = useContext(DataContext);
 
 	const handleChange = (event) => {
 		setFilterCategory({ category: event.target.value });
@@ -24,7 +24,7 @@ const Filter = () => {
 			<label className='label'>
 				Filter
 				<select 
-					value={filterCtegory.category} 
+					value={filterCategory.category} 
 					onChange={handleChange} 
 					className='selectContainer'
 				>

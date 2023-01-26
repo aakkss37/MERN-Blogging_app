@@ -4,7 +4,6 @@ import { Grid } from '@mui/material';
 import Categories from './Categories';
 import Posts from './post/Posts';
 import Filter from './filter/Filter';
-import { width } from '@mui/system';
 
 
 const postContainer = {

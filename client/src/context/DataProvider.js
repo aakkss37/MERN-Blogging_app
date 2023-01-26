@@ -15,11 +15,11 @@ const DataProvider = (props)=>{
 
 	// FILTER POST
 
-	const [filterCtegory, setFilterCategory] = useState(initialCategory);
+	const [filterCategory, setFilterCategory] = useState(initialCategory);
 
 
 	return (
-		<DataContext.Provider value={{ userAccount, setUserAccount, filterCtegory, setFilterCategory }}>
+		<DataContext.Provider value={{ userAccount, setUserAccount, filterCategory, setFilterCategory }}>
 			{props.children}
 		</DataContext.Provider>
 	)
