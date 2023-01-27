@@ -24,7 +24,13 @@ export const getAllPosts = async(request, responce)=>{
 }
 
 
-export const getPostDetail = (request, responce)=>{
-	console.log(request.query)
-	responce.status(200).json({msg: "ok"})
+export const getPostDetail = async(request, responce)=>{
+	const postId = request.query.post_id;
+	try {
+		const post = await Posts.findById(postId);
+		// console.log(post)
+		responce.status(200).json({post: post})
+	} catch (error) {
+		responce.status(500).json({msg: error.message})
+	}
 }
