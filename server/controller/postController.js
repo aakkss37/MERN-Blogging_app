@@ -34,3 +34,8 @@ export const getPostDetail = async(request, responce)=>{
 		responce.status(500).json({msg: error.message})
 	}
 }
+
+
+export const updatePost = (request, responce)=>{
+	console.log(request.body)
+}

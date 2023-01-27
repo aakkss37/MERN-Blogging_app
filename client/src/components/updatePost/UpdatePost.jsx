@@ -62,7 +62,7 @@ const UpdatePost = () => {
 
 	const savePost = async()=>{
 		try {
-			const responce = await API.createPost(postDetail);
+			const responce = await API.updatePost(postDetail);
 			console.log(responce);
 			// navigate('/home');
 		} catch (error) {
