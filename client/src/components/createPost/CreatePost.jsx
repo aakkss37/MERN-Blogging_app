@@ -78,7 +78,7 @@ const CreatePost = () => {
 		// postData.displayPic = defaultImages[category];
 		// postData.name = userAccount.name;
 		// postData.userName = userAccount.userName;
-	},[]);
+	}, []);
 
 	// console.log("postData after ===> ", postData);
 
