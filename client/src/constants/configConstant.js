@@ -32,7 +32,7 @@ apiService: {
 	url: '/endPoint',
 	method: 'POST/GET/PUT/PATCH/DELETE',
 	params: 'true/false',
-	quary: 'true/false',
+	query: 'true/false',
 }
 */
 export const SERVICE_URL = {
@@ -53,7 +53,12 @@ export const SERVICE_URL = {
 		method: 'POST'
 	},
 	getAllPosts: {
-		url: 'posts',
+		url: '/posts',
 		method: 'GET'
+	},
+	getPostDetail: {
+		url: '/posts-detail',
+		method: 'GET',
+		query: true,
 	},
 }
