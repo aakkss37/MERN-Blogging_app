@@ -40,7 +40,7 @@ const CreatePost = () => {
 	const { userAccount } = useContext(DataContext);
 	const navigate = useNavigate();
 
-	// console.log("postData before ===> ", postData);
+	console.log("postData  ===> ", postData);
 
 	// const [displayPicURL, setDisplayPicURL] = useState('');
 
@@ -65,11 +65,20 @@ const CreatePost = () => {
 
 	useEffect(() => {
 		// UPDATE postData FIELDS
-		postData.category = category;
-		postData.displayPic = defaultImages[category];
-		postData.name = userAccount.name;
-		postData.userName = userAccount.userName;
-	});
+		setPostData((prevStat)=>{
+			return{
+				...prevStat,
+				category: category,
+				displayPic: postData.displayPic ? postData.displayPic : defaultImages[category],
+				name: userAccount.name,
+				userName: userAccount.userName
+			}
+		})
+		// postData.category = category;
+		// postData.displayPic = defaultImages[category];
+		// postData.name = userAccount.name;
+		// postData.userName = userAccount.userName;
+	},[]);
 
 	// console.log("postData after ===> ", postData);
 
