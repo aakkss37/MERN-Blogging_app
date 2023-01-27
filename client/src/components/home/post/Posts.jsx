@@ -38,7 +38,7 @@ const Posts = () => {
 				if (filterCategory.category === 'All') {
 					// console.log("filter  ==>>>>>>>", filterCategory.category)
 					filter.push(
-						<Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/home/details/${post._id}`}>
+						<Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/details/?post_id=${post._id}`}>
 							<PostCard 
 								key={post._id}
 								picture={post.displayPic}
@@ -54,7 +54,7 @@ const Posts = () => {
 				if (filterCategory.category === post.category) {
 					// console.log("filterCategory.category ==>>>>>>>", filterCategory.category)
 					filter.push(
-						<Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/home/details/${post._id}`}>
+						<Link style={{ textDecoration: 'none', color: 'inherit' }} to={`home/details/?post_id=${post._id}`}>
 							<PostCard
 								key={post._id}
 								picture={post.displayPic}

@@ -1,10 +1,11 @@
 import './App.css';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, Outlet,  } from 'react-router-dom'
+import DataProvider from './context/DataProvider';
+
 import Login from './components/account/Login';
 import Home from './components/home/Home';
-import DataProvider from './context/DataProvider';
-import { BrowserRouter, Routes, Route, Navigate, Outlet,  } from 'react-router-dom'
 import Header from './components/header/Header';
-import { useState } from 'react';
 import CreatePost from './components/createPost/CreatePost';
 import Error404 from './components/Error404';
 import DetailedView from './components/details/DetailedView';
@@ -45,8 +46,8 @@ function App () {
 							<Route path='/create-new-post' element={<CreatePost />} />
 						</Route>
 
-						<Route path='/home/details/:post_id' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
-							<Route path='/home/details/:post_id' element={<DetailedView />} />
+						<Route path='/home/details' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
+							<Route path='/home/details' element={<DetailedView />} />
 						</Route>
 
 						<Route path="*" element={<Error404/>} />
