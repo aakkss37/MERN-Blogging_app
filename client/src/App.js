@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import { useState } from 'react';
 import CreatePost from './components/createPost/CreatePost';
 import Error404 from './components/Error404';
+import DetailedView from './components/details/DetailedView';
 
 
 const PrivateRoute = (props) => (
@@ -42,6 +43,10 @@ function App () {
 
 						<Route path='/create-new-post' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
 							<Route path='/create-new-post' element={<CreatePost />} />
+						</Route>
+
+						<Route path='/home/details/:post_id' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
+							<Route path='/home/details/:post_id' element={<DetailedView />} />
 						</Route>
 
 						<Route path="*" element={<Error404/>} />
