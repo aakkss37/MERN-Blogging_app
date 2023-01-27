@@ -73,7 +73,7 @@ const Posts = () => {
 			setFilteredPost(filter)
 		}
 		else {
-			<Box>No data to display</Box>;
+			setFilteredPost([<Box>No data to display</Box>]) ;
 		}
 	}, [filterCategory.category, posts])
 	
