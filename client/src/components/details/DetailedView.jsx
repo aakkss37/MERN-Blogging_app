@@ -15,7 +15,7 @@ const DetailedView = () => {
 			try {
 				// const responce = await axios.get(`http://localhost:8000/posts-detail?post_id=${postId}`)
 				const responce = await API.getPostDetail(postId)
-				// console.log(responce.data)
+				console.log(responce.data.post)
 			} catch (error) {
 				console.log("error while loading post detail: -> ", error)
 			}
@@ -28,7 +28,7 @@ const DetailedView = () => {
 		<div>
 			Detailed view.
 		</div>
-	)
+	) 
 }
 
 export default DetailedView
