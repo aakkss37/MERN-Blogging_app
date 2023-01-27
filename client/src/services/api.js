@@ -36,19 +36,21 @@ const axiosInstance = axios.create({ // axios.create --> You can create a new in
 
 
 // Interceptors can be used to modify requests before they are sent. This can be useful for adding authentication headers, setting timeouts, or adding query parameters.
-axios.interceptors.request.use(
+axiosInstance.interceptors.request.use(
 	(config) => {
 		// code eg: start gloable loader.
-		// console.log("request sent --->", config);
+		// console.log("config url ==>> ", config.url);
+		// console.log("config.TYPE.query ==>> ", config.TYPE.query);
+		
 		if (config.TYPE.query) {
-			config.url = config.url+"?post_id="+config.TYPE.query
+			config.url = config.url + "?post_id=" + config.TYPE.query
 		}
 		else if (config.TYPE.params){
 			config.params = config.TYPE.params
 		}
-
+		console.log("config url ==>> ", config.url);
 		return config;
-	},
+	}, 
 	(error) => {
 		console.log("could not make request --->", error);
 		return Promise.reject(error);
@@ -106,7 +108,7 @@ const processError = (error) => {
 	}
 	else if (error.request) {
 		// 2. request error  --> request sent sucessfuly... but no responce was received.
-		console.log("Error in request ---> ", error.toJSON());
+		console.log("Error in request ---> ", error);
 		return {
 			isError: true,
 			msg: API_NOTIFICATION_MESSAGE.requestFailuer,
@@ -115,7 +117,7 @@ const processError = (error) => {
 	}
 	else {
 		// 3. network error  --> couldn't make request(reason can be any thing.. like connection loss..etc) OR something went wrong from client side.
-		console.log("Error in network ---> ", error.toJSON());
+		console.log("Error in network ---> ", error);
 		return {
 			isError: true,
 			msg: API_NOTIFICATION_MESSAGE.networkError,
@@ -139,7 +141,7 @@ For example, on the first iteration, key would be "userLogin" and value would be
 and value would be { url: '/signup', method: 'POST' }, and so on.
 */
 for(const [key, value] of Object.entries(SERVICE_URL)){
-	API[key] = (body, showUploadProgress, showDownloadProgress) => { // ---> function creates an axios request
+	API[key] = (body, showUploadProgress, showDownloadProgress) => {  // ---> function creates an axios request
 		return axiosInstance({
 			url: value.url,
 			method: value.method,
@@ -148,13 +150,13 @@ for(const [key, value] of Object.entries(SERVICE_URL)){
 			headers: {
 				authorization: getAccessToken()
 			},
+			TYPE: getType(value, body),
 			onUploadProgress: (ProgressEvent)=>{
 				if(showUploadProgress){
 					let percentComplete = Math.round((ProgressEvent.loaded*100)/ProgressEvent.total);
 					showUploadProgress(percentComplete);
 				}
 			},
-			TYPE: getType(value, body),
 			onDownloadProgress: (ProgressEvent)=>{
 				if(showDownloadProgress){
 					let percentComplete = Math.round((ProgressEvent.loaded*100)/ProgressEvent.total);
@@ -165,4 +167,4 @@ for(const [key, value] of Object.entries(SERVICE_URL)){
 	}
 }
 
-console.log(API)
+// console.log(API)
