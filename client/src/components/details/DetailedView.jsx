@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { API } from '../../services/api'
@@ -12,16 +13,17 @@ const DetailedView = () => {
 	useEffect(()=>{
 		const getPostDetail = async()=>{
 			try {
+				// const responce = await axios.get(`http://localhost:8000/posts-detail?post_id=${postId}`)
 				const responce = await API.getPostDetail(postId)
-				console.log(responce.data)
+				// console.log(responce.data)
 			} catch (error) {
-				console.log("error while loading post detail: -> ", error.message)
+				console.log("error while loading post detail: -> ", error)
 			}
 		}
 		getPostDetail();
 	},[])
 
-	console.log(postId);
+	// console.log(postId);
 	return (
 		<div>
 			Detailed view.
