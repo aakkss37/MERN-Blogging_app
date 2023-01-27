@@ -34,7 +34,7 @@ const DetailedView = () => {
 		getPostDetail();
 	},[postId])
 
-	console.log(postDetail);
+	// console.log(postDetail);
 	return (
 		<div>
 			<Container>
@@ -43,7 +43,7 @@ const DetailedView = () => {
 					{
 						userAccount.userName === postDetail.userName &&
 						<>
-							<Link to={`/update/${postDetail._id}`}><EditIcon color="primary" /></Link>
+							<Link to={`/update-post/?post_id=${postDetail._id}`}><EditIcon color="primary" /></Link>
 							<DeleteIcon  />
 						</>
 					}
