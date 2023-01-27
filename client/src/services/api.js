@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_NOTIFICATION_MESSAGE, SERVICE_URL } from '../constants/configConstant';
-import { getAccessToken } from '../utils/commenUtils';
+import { getAccessToken, getType } from '../utils/commenUtils';
 
 /*
 This code defines an API object that contains functions for making various types of HTTP 
@@ -39,7 +39,14 @@ const axiosInstance = axios.create({ // axios.create --> You can create a new in
 axios.interceptors.request.use(
 	(config) => {
 		// code eg: start gloable loader.
-		console.log("request sent --->", config);
+		// console.log("request sent --->", config);
+		if (config.TYPE.query) {
+			config.url = config.url+"?post_id="+config.TYPE.query
+		}
+		else if (config.TYPE.params){
+			config.params = config.TYPE.params
+		}
+
 		return config;
 	},
 	(error) => {
@@ -147,6 +154,7 @@ for(const [key, value] of Object.entries(SERVICE_URL)){
 					showUploadProgress(percentComplete);
 				}
 			},
+			TYPE: getType(value, body),
 			onDownloadProgress: (ProgressEvent)=>{
 				if(showDownloadProgress){
 					let percentComplete = Math.round((ProgressEvent.loaded*100)/ProgressEvent.total);
@@ -156,3 +164,5 @@ for(const [key, value] of Object.entries(SERVICE_URL)){
 		})
 	}
 }
+
+console.log(API)

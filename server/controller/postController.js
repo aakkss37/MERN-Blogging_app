@@ -22,3 +22,8 @@ export const getAllPosts = async(request, responce)=>{
 		responce.status(500).json({msg: error.message});
 	}
 }
+
+
+export const getPostDetail = (request, responce)=>{
+	
+}
