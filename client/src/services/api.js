@@ -48,7 +48,7 @@ axiosInstance.interceptors.request.use(
 		else if (config.TYPE.params){
 			config.params = config.TYPE.params
 		}
-		console.log("config url ==>> ", config.url);
+		// console.log("config url ==>> ", config.url);
 		return config;
 	}, 
 	(error) => {
