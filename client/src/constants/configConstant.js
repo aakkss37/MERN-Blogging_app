@@ -61,4 +61,8 @@ export const SERVICE_URL = {
 		method: 'GET',
 		query: true,
 	},
+	updatePost: {
+		url: "/update",
+		method: "POST"
+	}
 }
