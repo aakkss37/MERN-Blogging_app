@@ -63,7 +63,7 @@ const UpdatePost = () => {
 	const savePost = async()=>{
 		try {
 			const responce = await API.updatePost(postDetail);
-			console.log(responce);
+			console.log(responce.data.updatedPost);
 			// navigate('/home');
 		} catch (error) {
 			console.log("something went wrong while crating a new post -->", error);

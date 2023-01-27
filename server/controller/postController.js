@@ -36,6 +36,15 @@ export const getPostDetail = async(request, responce)=>{
 }
 
 
-export const updatePost = (request, responce)=>{
-	console.log(request.body)
+export const updatePost = async(request, responce)=>{
+	try {
+		await Posts.findByIdAndDelete(request.body._id)
+		const updatedPost = await Posts.create(request.body);
+		updatedPost.save();
+		console.log(updatedPost);
+		responce.status(200).json({ updatedPost: updatedPost })
+	} catch (error) {
+		responce.status(500).json({msg: error.message})
+	}
+	
 }
