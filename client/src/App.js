@@ -9,6 +9,7 @@ import Header from './components/header/Header';
 import CreatePost from './components/createPost/CreatePost';
 import Error404 from './components/Error404';
 import DetailedView from './components/details/DetailedView';
+import UpdatePost from './components/updatePost/UpdatePost';
 
 
 const PrivateRoute = (props) => (
@@ -44,6 +45,10 @@ function App () {
 
 						<Route path='/create-new-post' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
 							<Route path='/create-new-post' element={<CreatePost />} />
+						</Route>
+						
+						<Route path='/update-post' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
+							<Route path='/update-post' element={<UpdatePost />} />
 						</Route>
 
 						<Route path='/home/details' element={<PrivateRoute isUserAuthanticated={isUserAuthanticated}/>}>
