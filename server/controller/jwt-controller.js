@@ -13,7 +13,7 @@ export const authanticateToken = (request, responce, next) => {
 			return responce.status(403).json({msg: "invalid token"});
 		}
 		// console.log("request ==> ", request);
-		console.log("user value: ===> ", user)
+		// console.log("user value: ===> ", user)
 		next();
 	})
 }

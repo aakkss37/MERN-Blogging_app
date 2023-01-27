@@ -25,5 +25,6 @@ export const getAllPosts = async(request, responce)=>{
 
 
 export const getPostDetail = (request, responce)=>{
-	
+	console.log(request.query)
+	responce.status(200).json({msg: "ok"})
 }
