@@ -4,6 +4,10 @@ import image from '../../assets/logo.png'
 
 
 const Header = () => {
+	// getItem("accessToken");
+	const logoutHandler = async()=>{
+		sessionStorage.clear();
+	}
 
 	return (
 		<Component>
@@ -15,7 +19,7 @@ const Header = () => {
 					<Link to='/contact'>CONTACT</Link>
 				</div>
 				<div>
-					<Link to='/account'>LOGOUT</Link>
+					<Link to='/login' onClick={logoutHandler}>LOGOUT</Link>
 				</div>
 			</Container>
 		</Component>
