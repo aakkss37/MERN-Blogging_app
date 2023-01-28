@@ -30,7 +30,7 @@ const Header = () => {
 					<Link to='/contact'>CONTACT</Link>
 				</div>
 				<div>
-					<Link to='/login' onClick={logoutHandler}><i class="icon-off"> {name}</i></Link>
+					<Link to='/login' onClick={logoutHandler}><i className="icon-off"> {name}</i></Link>
 				</div>
 			</Container>
 		</Component>
