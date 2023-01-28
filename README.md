@@ -30,8 +30,8 @@ Clone the repository
 > - *DATABASE_URL (for MongoDB)*
 2. Run npm install in both the client and server folders to install all the dependencies
 3. Run npm start in both the client and server folders to start the development server
-4. The Client should be running on [http://localhost:3000]{http://localhost:3000}
-5. The Client should be running on **http://localhost:8000**
+4. The Client should be running on http://localhost:3000
+5. The Client should be running on **PORT:8000**
 
 ### Contributing
 1. Fork the repository
