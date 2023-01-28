@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { API } from '../../services/api'
-import { Link, } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { DataContext } from '../../context/DataProvider';
 
 import { Box, Typography } from '@mui/material';
@@ -17,6 +17,7 @@ const DetailedView = () => {
 	const { userAccount } = useContext(DataContext);
 	const [searchParams] = useSearchParams();
 	const postId = searchParams.get('post_id');
+	const navigate = useNavigate()
 
 	const [postDetail, setPostDetail] = useState({});
 
@@ -34,6 +35,18 @@ const DetailedView = () => {
 		getPostDetail();
 	},[postId])
 
+
+
+	const deletePostHandler = async()=>{
+		try {
+			await API.deletePost();
+			navigate('/home');
+		} catch (error) {
+			console.log("error while requesting delete: -> ", error)
+		}
+	}
+
+
 	// console.log(postDetail);
 	return (
 		<div>
@@ -44,7 +57,7 @@ const DetailedView = () => {
 						userAccount.userName === postDetail.userName &&
 						<>
 							<Link to={`/update-post/?post_id=${postDetail._id}`}><EditIcon color="primary" /></Link>
-							<DeleteIcon  />
+							<DeleteIcon onClick={deletePostHandler} />
 						</>
 					}
 				</Box>
