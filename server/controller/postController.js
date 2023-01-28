@@ -1,3 +1,4 @@
+import { request } from "express";
 import Posts from "../model/postsModel.js";
 
 export const createPost = async(request, responce)=>{
@@ -47,4 +48,16 @@ export const updatePost = async(request, responce)=>{
 		responce.status(500).json({msg: error.message})
 	}
 	
+}
+
+
+export const deletePost = async(request, responce)=>{
+	const postId = request.query.post_id
+	console.log(postId)
+	try {
+		await Posts.findByIdAndDelete(postId)
+		responce.status(200).json({msg: "post deleted sucessfully"});
+	} catch (error) {
+		responce.status(500).json({ msg: error.message })
+	}
 }
