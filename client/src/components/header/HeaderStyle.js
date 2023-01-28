@@ -35,3 +35,4 @@ export const Image = styled('img')({
 	width: 80,
 	height: 'auto'
 });
+

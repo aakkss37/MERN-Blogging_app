@@ -1,11 +1,22 @@
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Component, Container, Image } from './HeaderStyle.js';
 import image from '../../assets/logo.png'
+import { DataContext } from '../../context/DataProvider.js';
 
 
 const Header = () => {
-	// getItem("accessToken");
-	const logoutHandler = async()=>{
+
+	// converting first letter to uppercase
+	function capitalizeFirstLetter (str) {
+		const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+		return capitalized;
+	}
+
+	const { userAccount } = useContext(DataContext);
+	const name = capitalizeFirstLetter(userAccount.name) 
+
+	const logoutHandler = async () => {
 		sessionStorage.clear();
 	}
 
@@ -19,7 +30,7 @@ const Header = () => {
 					<Link to='/contact'>CONTACT</Link>
 				</div>
 				<div>
-					<Link to='/login' onClick={logoutHandler}>LOGOUT</Link>
+					<Link to='/login' onClick={logoutHandler}><i class="icon-off"> {name}</i></Link>
 				</div>
 			</Container>
 		</Component>
