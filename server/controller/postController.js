@@ -42,7 +42,7 @@ export const updatePost = async(request, responce)=>{
 		await Posts.findByIdAndDelete(request.body._id)
 		const updatedPost = await Posts.create(request.body);
 		updatedPost.save();
-		console.log(updatedPost);
+		// console.log(updatedPost);
 		responce.status(200).json({ updatedPost: updatedPost })
 	} catch (error) {
 		responce.status(500).json({msg: error.message})
@@ -53,7 +53,7 @@ export const updatePost = async(request, responce)=>{
 
 export const deletePost = async(request, responce)=>{
 	const postId = request.query.post_id
-	console.log(postId)
+	// console.log(postId)
 	try {
 		await Posts.findByIdAndDelete(postId)
 		responce.status(200).json({msg: "post deleted sucessfully"});
