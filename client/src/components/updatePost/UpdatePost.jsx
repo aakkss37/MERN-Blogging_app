@@ -18,6 +18,7 @@ const initialPostData = {
 const UpdatePost = () => {
 	const [searchParams] = useSearchParams();
 	const postId = searchParams.get('post_id');
+	const navigate = useNavigate();
 
 	const [postDetail, setPostDetail] = useState(initialPostData);
 
@@ -63,8 +64,10 @@ const UpdatePost = () => {
 	const savePost = async()=>{
 		try {
 			const responce = await API.updatePost(postDetail);
-			console.log(responce.data.updatedPost);
-			// navigate('/home');
+			// const x = responce.data.updatedPost._id
+
+			// console.log( "x==> ",x);
+			navigate(`/home/details?post_id=${responce.data.updatedPost._id}`);
 		} catch (error) {
 			console.log("something went wrong while crating a new post -->", error);
 		}
