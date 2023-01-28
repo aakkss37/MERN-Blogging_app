@@ -39,7 +39,7 @@ const DetailedView = () => {
 
 	const deletePostHandler = async()=>{
 		try {
-			await API.deletePost();
+			await API.deletePost(postId);
 			navigate('/home');
 		} catch (error) {
 			console.log("error while requesting delete: -> ", error)
