@@ -1,0 +1,40 @@
+.contactContainer button {
+	text-transform: none;
+	font-size: 1.5rem;
+	width: 200px;
+	height: 50px;
+	font-weight: 700;
+	background: rgb(156 211 201);
+	color: rgb(69 81 70);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.contactContainer button:hover {
+	color: rgb(156 211 201);
+	background: rgb(69 81 70);
+}
+
+.contactContainer h1 {
+	font-size: 3rem;
+	margin: 50px;
+}
+
+.iconContainer {
+	margin: 100px;
+	display: 'flex';
+	justify-content: 'center';
+	align-items: 'center';
+}
+
+.iconContainer a {
+	text-decoration: none;
+	margin: 15px;
+	font-size: 2.3rem;
+	color: rgb(68 80 69);
+}
+
+.iconContainer a:hover {
+	color: rgb(156 211 201);
+}
