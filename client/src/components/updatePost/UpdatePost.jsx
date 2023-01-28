@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AddCircle as Add } from '@mui/icons-material';
 import { Container, StyledFormControl, Image, Label, StyledInputBase, StyledButton, StyledTextArea, } from './UpdatePostStyle.js'
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { DataContext } from '../../context/DataProvider';
 import { API } from '../../services/api';
 
 const initialPostData = {
