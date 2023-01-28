@@ -40,7 +40,7 @@ const CreatePost = () => {
 	const { userAccount } = useContext(DataContext);
 	const navigate = useNavigate();
 
-	console.log("postData  ===> ", postData);
+	// console.log("postData  ===> ", postData);
 
 	// const [displayPicURL, setDisplayPicURL] = useState('');
 
@@ -50,7 +50,7 @@ const CreatePost = () => {
 		data.append("file", file);
 		// API CALL
 		const responce = await API.uploadDisplayPicture(data); //return a url of the pic
-		console.log("responce ===> ", responce.data);
+		// console.log("responce ===> ", responce.data);
 		// postData.displayPic = responce.data;
 		setPostData((prevPostData) => {
 			return {
@@ -88,8 +88,8 @@ const CreatePost = () => {
 
 	const savePost = async()=>{
 		try {
-			const responce = await API.createPost(postData);
-			console.log(responce);
+			await API.createPost(postData);
+			// console.log(responce);
 			navigate('/home');
 		} catch (error) {
 			console.log("something went wrong while crating a new post -->", error );
@@ -104,7 +104,7 @@ const CreatePost = () => {
 	//because the bracket notation allows you to use a variable as the key to 
 	//access the property.
 	let imageUrl = postData.displayPic ? postData.displayPic : defaultImages[category]; 	// --> display picture url
-	console.log("imageURL ===>>>>>>>>>>", imageUrl);
+	// console.log("imageURL ===>>>>>>>>>>", imageUrl);
 	return (
 		<Container>
 
