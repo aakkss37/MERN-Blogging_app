@@ -1,4 +1,4 @@
-# Project Title: Blog
+# Project Title: Blog Application
 ## Description
 A full-featured blog website where users can create an account, login, and write blogs with a title and add pictures. The users have the ability to update their own blogs, change the display picture of their blogs, delete their own blogs and  filter blogs by category. The website is also multi-page, allowing users to navigate through different pages. Website is also handling 404 Error and show a beautiful no result found page. 
 
