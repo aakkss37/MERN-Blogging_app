@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js"
-  },
+  }, 
   "author": "amarkumar.sharma.124@gmail.com",
   "license": "ISC",
   "dependencies": {
